@@ -10,6 +10,14 @@ jobs:
         uses: actions/checkout@v3
 
       
+      - name: Install Correct Solidity Compiler Version
+        run: |
+          pip install solc-select || true
+          solc-select install 0.7.4 || true
+          solc-select use 0.7.4 || true
+        continue-on-error: true
+
+     
       - name: Run Slither Security Scan
         uses: crytic/slither-action@main
         with:
