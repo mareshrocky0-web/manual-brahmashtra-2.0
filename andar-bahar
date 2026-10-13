@@ -1,0 +1,24 @@
+def find_next_letters(sequence, num_letters=3):
+    last_char = sequence[-1]
+    next_letters = []
+    
+    current_ascii = ord(last_char)
+    
+    for _ in range(num_letters):
+        current_ascii += 1
+        if current_ascii > ord('B'):
+            current_ascii = ord('A')
+        next_letters.append(chr(current_ascii))
+        
+    return next_letters
+
+# Input sequence
+input_sequence = ["A", "B"]
+
+# Get the next 3 letters
+output = find_next_letters(input_sequence, 3)
+
+# Print the results
+print("Your sequence:", input_sequence)
+print("Next letters are:", output)
+game link ture https://diamond.shreeganesh.live/dc/gamev1.1/andar-bahar-MTUwMDA3-TUFDODgtWEFCMTAx-TUFDODg=-TWFjODggR2FtaW5n-TUFDSFVC
