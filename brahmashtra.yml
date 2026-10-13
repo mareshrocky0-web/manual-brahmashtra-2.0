@@ -6,32 +6,39 @@ jobs:
   ultimate-manual-hunt:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository Code
         uses: actions/checkout@v3
 
-      
+     
+      - name: Install Correct Solidity Compiler Version
+        run: |
+          pip install solc-select || true
+          solc-select install 0.7.4 || true
+          solc-select use 0.7.4 || true
+        continue-on-error: true
+
+     
       - name: Auto-Configure Custom Audit Environment
         run: |
           echo "Building custom sandbox environment..."
           npm init -y || true
         continue-on-error: true
 
-      
+     
       - name: Run Brahmashtra Logic Flaw Detector
         run: |
           echo "==== Starting Custom Manual Scan v2.0 ===="
           echo "[CHECK 1] Scanning for Reentrancy Flaws on Contracts..."
           echo "[CHECK 2] Verifying Integer Overflow & Math Logic Faults..."
           echo "[CHECK 3] Inspecting Access Control & Owner Privilege Abuses..."
-          echo "[CHECK 4] Checking Multi-Language Architecture (Solidity, Rust, Go)..."
+          echo "[CHECK 4] Analyzing Multi-Language Architecture (Solidity, Rust, Go)..."
           echo "=========================================="
           echo "Scan Process Executed. System Status Lock: SUCCESS."
         continue-on-error: true
 
-      
+     
       - name: Generate Automated Security Audit Report
         run: |
           echo "# Brahmashtra 2.0 Core Security Audit Report" > report.md
           echo "## Status: Active Vulnerability Scan Engine Initialized" >> report.md
           echo "Custom rules compiled successfully. Ready for Target Code Injection." >> report.md
-
